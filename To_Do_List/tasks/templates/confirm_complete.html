@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Confirm Complate</h2>
+    <p>Are you sure you want to Complate "{{ object.taskTitle }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-success">Yes, complate</button>
+        <a href="{% url 'show_tasks' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

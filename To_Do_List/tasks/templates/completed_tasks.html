@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Task Management</h2>
+
+    {% if task %}
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tsk in task %}
+                <tr>
+                    <td>{{ tsk.taskTitle }}</td>
+                    <td>{{ tsk.taskDescription }}</td>
+                    <td>{{ tsk.is_completed|yesno:"Completed,Not Completed" }}</td>
+                    <td>
+                        <a href="{% url 'update' pk=tsk.id %}" class='btn btn-warning btn-sm'>Edit</a>
+                        <a href="{% url 'delete_task' pk=tsk.id %}" class='btn btn-danger btn-sm'>Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-center">No tasks available.</p>
+    {% endif %}
+</div>
+{% endblock content %}
